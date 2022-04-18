@@ -1,3 +1,5 @@
+import { Icon } from "./icons.ts";
+
 type BadgeStyle =
   | "plastic"
   | "flat"
@@ -139,13 +141,15 @@ export class Badge implements Schema {
     style = "flat-square",
     cacheSeconds,
   }: BadgeParameters) {
+    const icon = new Icon(namedLogo || message || label);
+
     this.schemaVersion = 1;
     this.label = label;
     this.message = message;
-    this.color = color;
+    this.color = color || icon.color;
     this.labelColor = labelColor;
     this.isError = isError;
-    this.namedLogo = namedLogo || toSimpleIconsName(message);
+    this.namedLogo = icon.slug;
     this.logoSvg = logoSvg;
     this.logoColor = logoColor || color;
     this.logoWidth = logoWidth;
@@ -157,12 +161,4 @@ export class Badge implements Schema {
   public static fromQueryString(params: URLSearchParams): Badge {
     return new Badge(Object.assign(Object.fromEntries(params.entries())));
   }
-}
-
-export function toSimpleIconsName(name: string) {
-  return name
-    .trim()
-    .toLocaleLowerCase()
-    .replace(/\s/g, "-")
-    .replace(/\./g, "dot");
 }
