@@ -1,3 +1,4 @@
+import { colorForBackground } from "./color.ts";
 import { Icon } from "./icons.ts";
 
 type BadgeStyle =
@@ -147,7 +148,7 @@ export class Badge implements Schema {
     this.label = label;
     this.message = message;
     this.color = color || icon.color;
-    this.labelColor = labelColor;
+    this.labelColor = labelColor || colorForBackground(icon.color);
     this.isError = isError;
     this.namedLogo = icon.slug;
     this.logoSvg = logoSvg;
