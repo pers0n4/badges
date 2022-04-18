@@ -121,6 +121,6 @@ export function colorForBackground(colorHex: string): string {
     return "rgba(238, 238, 238, 0.87)";
   } else {
     // Material Color: Grey 900 (#212121)
-    return "rgba(33, 33, 33, 0.87)[";
+    return "rgba(33, 33, 33, 0.87)";
   }
 }
