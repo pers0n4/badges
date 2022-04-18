@@ -6,6 +6,9 @@ type RGBA = {
 };
 
 const hexColorRegex = /^#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})$/i;
+export function isHexColor(colorString: string): boolean {
+  return hexColorRegex.test(colorString);
+}
 
 /**
  * @param colorHex
@@ -114,7 +117,10 @@ export function brightness(colorHex: string): number {
  * @param colorHex
  * @returns background color
  */
-export function colorForBackground(colorHex: string): string {
+export function colorForBackground(colorHex: string): string | undefined {
+  if (!isHexColor(colorHex)) {
+    return undefined;
+  }
   const brightnessThreshold = 0.69;
   if (brightness(colorHex) <= brightnessThreshold) {
     // Material Color: Grey 200 (#eeeeee)

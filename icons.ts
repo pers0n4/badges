@@ -32,15 +32,15 @@ export class Icon {
   }
 
   public get title(): string {
-    return this.icon.title;
+    return this.icon?.title;
   }
 
   public get slug(): string {
-    return this.icon.slug;
+    return this.icon?.slug;
   }
 
   public get color(): string {
-    return this.icon.hex;
+    return this.icon?.hex;
   }
 
   public static getSimpleIcon(name: string): SimpleIcon {
