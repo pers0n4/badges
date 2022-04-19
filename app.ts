@@ -4,7 +4,7 @@ import {
   STATUS_TEXT,
 } from "https://deno.land/std@0.135.0/http/http_status.ts";
 import * as log from "https://deno.land/std@0.135.0/log/mod.ts";
-import { Badge } from "./shields.ts";
+import { Badge } from "./badge.ts";
 
 function handler(req: Request): Response {
   const url = new URL(req.url);
