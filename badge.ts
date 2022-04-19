@@ -111,7 +111,7 @@ export interface Schema {
   cacheSeconds?: number;
 }
 
-type BadgeParameters = Omit<Schema, "schemaVersion">;
+export type BadgeParameters = Omit<Schema, "schemaVersion">;
 
 export class Badge implements Schema {
   public readonly schemaVersion: 1;
