@@ -152,7 +152,7 @@ export class Badge implements Schema {
     this.isError = isError;
     this.namedLogo = icon.slug;
     this.logoSvg = logoSvg;
-    this.logoColor = logoColor || color;
+    this.logoColor = logoColor || icon.color;
     this.logoWidth = logoWidth;
     this.logoPosition = logoPosition;
     this.style = style;
