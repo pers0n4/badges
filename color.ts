@@ -123,8 +123,8 @@ export function colorForBackground(colorHex: string): string | undefined {
   }
   const brightnessThreshold = 0.69;
   if (brightness(colorHex) <= brightnessThreshold) {
-    // Material Color: Grey 200 (#eeeeee)
-    return "rgba(238, 238, 238, 0.87)";
+    // Material Color: Grey 100 (#f5f5f5)
+    return "rgba(245, 245, 245, 0.87)";
   } else {
     // Material Color: Grey 900 (#212121)
     return "rgba(33, 33, 33, 0.87)";
