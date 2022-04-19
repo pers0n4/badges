@@ -8,9 +8,15 @@ import { Badge } from "./badge.ts";
 
 function handler(req: Request): Response {
   const url = new URL(req.url);
+  const { searchParams, pathname } = url;
+
+  const message = pathname.slice(1);
+  if (message) {
+    searchParams.set("message", message);
+  }
 
   try {
-    const badge = Badge.fromQueryString(url.searchParams);
+    const badge = Badge.fromQueryString(searchParams);
 
     return new Response(JSON.stringify(badge), {
       status: Status.OK,
