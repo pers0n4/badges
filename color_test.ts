@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.135.0/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std@0.147.0/testing/asserts.ts";
 import { parseHexColor } from "./color.ts";
 
 Deno.test("3 digit hex", () => {

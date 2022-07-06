@@ -1,9 +1,9 @@
 import {
   Status,
   STATUS_TEXT,
-} from "https://deno.land/std@0.135.0/http/http_status.ts";
-import { serve } from "https://deno.land/std@0.135.0/http/server.ts";
-import * as log from "https://deno.land/std@0.135.0/log/mod.ts";
+} from "https://deno.land/std@0.147.0/http/http_status.ts";
+import { serve } from "https://deno.land/std@0.147.0/http/server.ts";
+import * as log from "https://deno.land/std@0.147.0/log/mod.ts";
 import { Badge } from "./badge.ts";
 
 function handler(req: Request): Response {

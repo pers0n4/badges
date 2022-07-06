@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.135.0/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std@0.147.0/testing/asserts.ts";
 import * as simpleIcons from "https://unpkg.com/simple-icons/icons.mjs";
 import { Badge, BadgeParameters, Schema } from "./badge.ts";
 import { colorForBackground } from "./color.ts";
