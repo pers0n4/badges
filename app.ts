@@ -26,7 +26,7 @@ function handler(req: Request): Response {
     });
   } catch (error) {
     log.error(error);
-    return new Response(STATUS_TEXT.get(Status.BadRequest), {
+    return new Response(STATUS_TEXT[Status.BadRequest], {
       status: Status.BadRequest,
       headers: {
         "Content-Type": "text/plain",
