@@ -1,4 +1,4 @@
-import * as simpleIcons from "https://unpkg.com/simple-icons@6.19.0/icons.mjs";
+import * as simpleIcons from "https://unpkg.com/simple-icons/icons.mjs";
 
 interface SimpleIcon {
   title: string;
