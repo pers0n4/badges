@@ -1,22 +1,18 @@
+<div align="center">
+
 # Badges
 
 [![Shields.io]](https://shields.io/)
 [![Simple Icons]](https://simpleicons.org/)
 
-> Custom endpoint for [shields.io](https://shields.io/)
+</div>
+
+> Build custom endpoint for [shields.io](https://shields.io/)
 
 ## Usage
 
-It automatically makes badges for my use cases.
-
 ```markdown
-e.g. to make GitHub badge
-
-[github]: https://img.shields.io/endpoint?url=https://badges.deno.dev/GitHub
-
-will be converted to
-
-[github]: https://img.shields.io/static/v1?style=flat-square&logo=github&label=&message=GitHub&logoColor=181717&labelColor=f5f5f5de&color=181717
+![GitHub](https://img.shields.io/endpoint?url=https://badges.deno.dev/GitHub)
 ```
 
 ## Prerequisites
@@ -25,14 +21,15 @@ will be converted to
 
 ## Commands
 
+### Run server
+
 ```shell
-# run server
-deno run --allow-net [--watch] app.ts
+deno serve [--watch] server.ts
+```
 
-# cache dependencies
-deno cache *.ts
+### Test
 
-# test
+```shell
 deno test
 ```
 
@@ -40,6 +37,6 @@ deno test
 
 [![LICENSE]](./LICENSE)
 
-[shields.io]: https://img.shields.io/endpoint?url=https://badges.deno.dev/Shields.io
-[simple icons]: https://img.shields.io/endpoint?url=https://badges.deno.dev/?message=Simple%2BIcons
-[license]: https://img.shields.io/github/license/pers0n4/badges?style=for-the-badge&color=181717
+[Shields.io]: https://img.shields.io/badge/Shields.io-000000?style=for-the-badge&logo=shieldsdotio
+[Simple Icons]: https://img.shields.io/badge/Simple_Icons-111111?style=for-the-badge&logo=simpleicons
+[LICENSE]: https://img.shields.io/github/license/pers0n4/badges?style=for-the-badge
