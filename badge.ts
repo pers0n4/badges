@@ -1,14 +1,14 @@
+import * as icons from "simple-icons";
 import { colorForBackground } from "./color.ts";
-import { Icon } from "./icons.ts";
 
 type BadgeStyle =
-  | "plastic"
   | "flat"
   | "flat-square"
+  | "plastic"
   | "for-the-badge"
   | "social";
 
-export interface Schema {
+export interface BadgeSchema {
   /**
    * Always the number 1.
    */
@@ -16,7 +16,6 @@ export interface Schema {
 
   /**
    * The left text, or the empty string to omit the left side of the badge.
-   *
    * This can be overridden by the query string.
    */
   label: string;
@@ -27,139 +26,106 @@ export interface Schema {
   message: string;
 
   /**
-   * The right color. Supports the eight named colors above, as well as hex, rgb, rgba, hsl, hsla and css named colors.
-   *
+   * The right color.
+   * Supports the eight named colors above, as well as hex, rgb, rgba, hsl, hsla and css named colors.
    * This can be overridden by the query string.
    *
-   * @defaultValue `lightgrey`
+   * @defaultValue "lightgrey"
    */
   color?: string;
 
   /**
    * The left color.
-   *
    * This can be overridden by the query string.
    *
-   * @defaultValue `grey`
+   * @defaultValue "grey"
    */
   labelColor?: string;
 
   /**
-   * `true` to treat this as an error badge. This prevents the user from overriding the color. In the future it may affect cache behavior.
+   * `true` to treat this as an error badge.
+   * This prevents the user from overriding the color.
+   * In the future it may affect cache behavior.
    *
-   * @defaultValue `false`
+   * @defaultValue false
    */
   isError?: boolean;
 
   /**
    * One of the named logos supported by Shields or [simple-icons](https://simpleicons.org/).
-   *
    * Can be overridden by the query string.
-   *
-   * @defaultValue `none`
    */
   namedLogo?: string;
 
   /**
    * An SVG string containing a custom logo.
-   *
-   * @defaultValue `none`
    */
   logoSvg?: string;
 
   /**
    * Same meaning as the query string.
-   *
-   * Can be overridden by the query string. Only works for named logos.
-   *
-   * @defaultValue `none`
+   * Can be overridden by the query string.
+   * Only works for simple-icons logos.
    */
   logoColor?: string;
 
   /**
+   * Make icons adaptively resize by setting `auto`.
+   * Useful for some wider logos like `amd` and `amg`.
+   * Supported for simple-icons logos only.
+   */
+  logoSize?: number;
+
+  /**
    * Same meaning as the query string.
-   *
    * Can be overridden by the query string.
-   *
-   * @defaultValue `none`
    */
   logoWidth?: number;
 
   /**
-   * Same meaning as the query string.
-   *
-   * Can be overridden by the query string.
-   *
-   * @defaultValue `none`
-   */
-  logoPosition?: string;
-
-  /**
    * The default template to use.
-   *
    * Can be overridden by the query string.
    *
-   * @defaultValue `flat`
+   * @defaultValue "flat"
    */
   style?: BadgeStyle;
-
-  /**
-   * Set the HTTP cache lifetime in seconds, which should be respected by the Shields' CDN and downstream users. Values below 300 will be ignored. This lets you tune performance and traffic vs. responsiveness. The value you specify can be overridden by the user via the query string, but only to a longer value.
-   *
-   * @defaultValue `300`
-   */
-  cacheSeconds?: number;
 }
 
-export type BadgeParameters = Omit<Schema, "schemaVersion">;
+export class Badge implements BadgeSchema {
+  readonly schemaVersion = 1;
+  label: string;
+  message: string;
+  color?: string;
+  labelColor?: string;
+  isError?: boolean;
+  namedLogo?: string;
+  logoSvg?: string;
+  logoColor?: string;
+  logoSize?: number;
+  logoWidth?: number;
+  style?: BadgeStyle;
 
-export class Badge implements Schema {
-  public readonly schemaVersion: 1;
-  public label: string;
-  public message: string;
-  public color?: string;
-  public labelColor?: string;
-  public isError?: boolean;
-  public namedLogo?: string;
-  public logoSvg?: string;
-  public logoColor?: string;
-  public logoWidth?: number;
-  public logoPosition?: string;
-  public style?: BadgeStyle;
-  public cacheSeconds?: number;
+  constructor(slug: string) {
+    slug = slug.replace(/\s+/g, "").replace(/\./g, "dot").toLocaleLowerCase();
+    const logo = slug.replace(
+      /^[a-z]/,
+      (firstLetter) => firstLetter.toUpperCase(),
+    );
+    const icon = icons[`si${logo}` as keyof typeof icons] as icons.SimpleIcon;
 
-  constructor({
-    label = "",
-    message = "",
-    color,
-    labelColor,
-    isError,
-    namedLogo,
-    logoSvg,
-    logoColor,
-    logoWidth,
-    logoPosition,
-    style = "flat-square",
-    cacheSeconds,
-  }: BadgeParameters) {
-    const icon = new Icon(namedLogo || message || label);
-
-    this.schemaVersion = 1;
-    this.label = label;
-    this.message = message;
-    this.color = color || icon.color;
-    this.labelColor = labelColor || colorForBackground(icon.color);
-    this.isError = isError;
+    this.label = "";
+    this.message = icon.title;
+    this.color = icon.hex;
+    this.labelColor = colorForBackground(icon.hex);
     this.namedLogo = icon.slug;
-    this.logoSvg = logoSvg;
-    this.logoColor = logoColor || icon.color;
-    this.logoWidth = logoWidth;
-    this.logoPosition = logoPosition;
-    this.style = style;
-    this.cacheSeconds = cacheSeconds;
+    this.style = "flat-square";
   }
 
-  public static fromQueryString(params: URLSearchParams): Badge {
-    return new Badge(Object.assign(Object.fromEntries(params.entries())));
+  public toObject(): BadgeSchema {
+    return { ...this };
+  }
+
+  public toJson(): string {
+    return JSON.stringify(this.toObject());
   }
 }
