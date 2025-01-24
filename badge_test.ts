@@ -12,6 +12,7 @@ Deno.test("Deno Badge", () => {
   assertEquals(actual.message, "Deno");
   assertEquals(actual.namedLogo, "deno");
   assertEquals(actual.color, icon.hex);
+  assertEquals(actual.logoColor, icon.hex);
   assertEquals(actual.labelColor, colorForBackground(icon.hex));
 });
 
@@ -24,6 +25,7 @@ Deno.test("Node.js Badge", () => {
   assertEquals(actual.message, "Node.js");
   assertEquals(actual.namedLogo, "nodedotjs");
   assertEquals(actual.color, icon.hex);
+  assertEquals(actual.logoColor, icon.hex);
   assertEquals(actual.labelColor, colorForBackground(icon.hex));
 });
 
@@ -36,5 +38,6 @@ Deno.test("AWS Badge", () => {
   assertEquals(actual.message, "Amazon Web Services");
   assertEquals(actual.namedLogo, "amazonwebservices");
   assertEquals(actual.color, icon.hex);
+  assertEquals(actual.logoColor, icon.hex);
   assertEquals(actual.labelColor, colorForBackground(icon.hex));
 });

@@ -118,6 +118,7 @@ export class Badge implements BadgeSchema {
     this.color = icon.hex;
     this.labelColor = colorForBackground(icon.hex);
     this.namedLogo = icon.slug;
+    this.logoColor = icon.hex;
     this.style = "flat-square";
   }
 
